@@ -6,7 +6,9 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
+RUN yarn build
+
 EXPOSE 3000
 ENV PORT 3000
 
-CMD [ "node", "run", "dev", "start"]
+CMD [ "npm", "run", "dev"]
