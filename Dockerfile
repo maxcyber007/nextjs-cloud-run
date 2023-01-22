@@ -1,21 +1,22 @@
-FROM node:12
+FROM node:16.14.0-alpine AS deps
+RUN apk update
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+ENV NODE_ENV production
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S nextjs -u 1001
+COPY package.json ./
+RUN yarn build && yarn install --production
+COPY  /app/next.config.js ./
+COPY  /app/public ./public
+COPY  --chown=nextjs:nodejs /app/.next ./.next
+COPY  /app/node_modules ./node_modules
+COPY  /app/package.json ./package.json
 
-ENV PORT 3000
+RUN npx next telemetry disable
 
-# Create app directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+USER nextjs
 
-# Installing dependencies
-COPY package*.json /usr/src/app/
-RUN npm install
-
-# Copying source files
-COPY . /usr/src/app
-
-# Building app
-RUN npm run build
 EXPOSE 3000
 
-# Running the app
-CMD "npm" "run" "dev"
+CMD ["yarn", "start"]
