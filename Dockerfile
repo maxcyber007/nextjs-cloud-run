@@ -1,7 +1,5 @@
 FROM node:16
 
-ENV PORT 3000
-
 # Create app directory
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
@@ -15,6 +13,7 @@ COPY . /usr/src/app
 
 # Building app
 RUN npm run build
+ENV PORT 3000
 EXPOSE 3000
 
 # Running the app
