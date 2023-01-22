@@ -18,4 +18,4 @@ EXPOSE 3000
 ENV PORT 3000
 
 # Running the app
-CMD [ "npm", "run", "dev" ]
+CMD "npm", "run", "dev"
