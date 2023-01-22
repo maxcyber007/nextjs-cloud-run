@@ -1,14 +1,21 @@
-FROM node:16-alpine
+FROM node:16
 
-RUN mkdir /app
-WORKDIR /app
-
-COPY package*.json ./
-RUN npm install
-
-RUN yarn build
-
-EXPOSE 3000
 ENV PORT 3000
 
-CMD [ "npm", "run", "dev"]
+# Create app directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+# Installing dependencies
+COPY package*.json /usr/src/app/
+RUN npm install
+
+# Copying source files
+COPY . /usr/src/app
+
+# Building app
+RUN npm run build
+EXPOSE 3000
+
+# Running the app
+CMD "npm" "run" "dev"
