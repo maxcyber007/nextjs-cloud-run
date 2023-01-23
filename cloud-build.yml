@@ -1,0 +1,23 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        docker pull gcr.io/tough-bearing-364504/nextjs-cloud-run:latest || exit 0
+  - name: gcr.io/cloud-builders/docker
+    timeout: 1200s
+    args:
+      [
+        'build',
+        '-f',
+        'Dockerfile',
+        '-t',
+        'gcr.io/tough-bearing-364504/nextjs-cloud-run',
+        '--cache-from',
+        'gcr.io/tough-bearing-364504/nextjs-cloud-run:latest',
+        '.',
+      ]
+timeout: 1200s
+images:
+  - gcr.io/tough-bearing-364504/nextjs-cloud-run
