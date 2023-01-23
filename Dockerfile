@@ -1,13 +1,20 @@
-FROM node:13.6-alpine
+# base node image
+FROM node:10
 
-ARG BUILD_ENV
-
-RUN mkdir -p /usr/src/app
-COPY package*.json /usr/src/app/
-RUN cd /usr/src/app/; npm install
 WORKDIR /usr/src/app
-COPY . /usr/src/app
 
+ENV PORT 8080
+ENV HOST 0.0.0.0
+
+COPY package*.json ./
+
+RUN npm install 
+
+# Copy local nuxt code to the container
+COPY . .
+
+# Build production app
 RUN npm run build
 
-CMD [ "npm", "run", "start" ]
+# Start the service
+CMD npm start
