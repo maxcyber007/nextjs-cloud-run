@@ -1,5 +1,5 @@
 # base node image
-FROM node:10
+FROM node:16
 
 WORKDIR /usr/src/app
 
@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Build production app
-RUN npm run build
+#RUN npm run build
 
 # Start the service
-CMD npm start
+CMD npm run dev
