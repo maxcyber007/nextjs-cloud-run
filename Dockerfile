@@ -1,4 +1,4 @@
-FROM node:alphin
+FROM node:16
 
 ENV PORT 3000
 
