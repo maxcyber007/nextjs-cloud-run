@@ -1,5 +1,5 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', 'Dockerfile', '-t', 'gcr.io/tough-bearing-364504/nextjs-cloud-run:latest', '.']
+  args: ['build', '-t', 'Dockerfile', 'gcr.io/tough-bearing-364504/nextjs-cloud-run:latest', '.']
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/tough-bearing-364504/nextjs-cloud-run:latest']
