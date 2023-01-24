@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && next export",
-    "start": "next start -p $PORT",
+    "start": "next start",
     "production": "next build && next start",
     "lint": "next lint"
   },
